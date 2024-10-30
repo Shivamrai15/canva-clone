@@ -19,7 +19,7 @@ export const LoginCard = () => {
 
     const onAuthLogin = async( provider:"google"|"github" )=>{
         try {
-            
+            setIsLoading(true);
             await signIn(provider, {
                 redirectTo : "/"
             });
@@ -27,6 +27,8 @@ export const LoginCard = () => {
         } catch (error) {
             console.log(error);
             toast.error("Something went wrong");
+        } finally {
+            setIsLoading(false);
         }
     }
 
