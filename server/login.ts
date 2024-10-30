@@ -1,6 +1,9 @@
 "use server";
+
 import bcrypt from "bcryptjs";
+import { signIn } from "@/auth";
 import { getTokenByEmail } from "@/lib/tokens";
+import { AuthError } from "next-auth";
 
 export const login = async(email: string, code: string)=>{
     try {
@@ -29,16 +32,23 @@ export const login = async(email: string, code: string)=>{
             }
         } 
 
+        await signIn("credentials", {email});
+
         return {
-            message : "Code verified successfully",
+            message : "Logged In Successfully",
             status : true
         }
 
     } catch (error) {
-        console.log("LOGIN ERROR", error);
-        return {
-            message : "Internal server error",
-            status : false 
+        if (error instanceof AuthError) {
+            switch (error.type) {
+                case "CredentialsSignin":
+                    return { message: "Invalid credentials!", status : false }
+                default:
+                    return { message: "Internal server error", status : true }
+            }
         }
+      
+        throw error;
     }
 }

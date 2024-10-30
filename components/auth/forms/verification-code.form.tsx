@@ -17,7 +17,6 @@ import { ChevronLeft, Loader2 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
-// import { useFormControl } from "@/hooks/use-form-control";
 import { useEffect, useState } from "react";
 import { login } from "@/server/login";
 
@@ -61,7 +60,6 @@ export const VerificationCodeForm = ({
             setError("");
         } catch (error) {
             console.log(error);
-            toast.error("Something went wrong");
         }
     }
     

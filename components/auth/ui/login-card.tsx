@@ -1,17 +1,34 @@
 "use client";
 
 import { useState } from "react";
+import { signIn } from "next-auth/react";
 
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 import { HiOutlineMail } from "react-icons/hi";
 import { OauthButton } from "./oauth-button";
 import { LoginForm } from "@/components/auth/forms/login.form";
+import { toast } from "sonner";
 
 
 export const LoginCard = () => {
 
     const [useEmail, setUseEmail] = useState(false);
+    const [isLoading, setIsLoading] = useState(false)
+
+
+    const onAuthLogin = async( provider:"google"|"github" )=>{
+        try {
+            
+            await signIn(provider, {
+                redirectTo : "/"
+            });
+
+        } catch (error) {
+            console.log(error);
+            toast.error("Something went wrong");
+        }
+    }
 
     return (
         <div className="w-full p-6 md:p-7 md:py-9">
@@ -27,21 +44,21 @@ export const LoginCard = () => {
                         <div className="space-y-4">
                             <OauthButton
                                 title="Continue with Google"
-                                onClick={()=>{}}
-                                disabled={false}
+                                onClick={()=>onAuthLogin("google")}
+                                disabled={isLoading}
                                 icon={FcGoogle}
                             />
                             <OauthButton
                                 title="Continue with Github"
                                 icon={FaGithub}
-                                onClick={()=>{}}
-                                disabled={false}
+                                onClick={()=>onAuthLogin("github")}
+                                disabled={isLoading}
                             />
                             <OauthButton
                                 title="Continue with Email"
                                 icon={HiOutlineMail}
                                 onClick={()=>setUseEmail(true)}
-                                disabled={false}
+                                disabled={isLoading}
                             />
                         </div>
                         <p className="text-sm text-zinc-300">By continuing, you agree to Canva’s Terms of Use. Read our Privacy Policy.</p>
