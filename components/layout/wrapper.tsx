@@ -20,7 +20,7 @@ export const Wrapper = ({
                     <InstantOptions />
                 </div>
             </aside>
-            <div className="h-[calc(100%-57px)] w-full md:h-full md:w-[calc(100%-20rem)] transition-all">
+            <div className="h-[calc(100%-57px)] w-full md:h-full md:w-[calc(100%-20rem)] transition-all overflow-hidden">
                 <div className="w-full h-full">
                     {children}
                 </div>

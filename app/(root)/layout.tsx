@@ -1,3 +1,4 @@
+import { ModalProvider } from "@/providers/modal.provider";
 import { ThemeProvider } from "@/providers/theme.provider";
 
 interface RootLayoutProps {
@@ -16,6 +17,7 @@ const RootLayout = ({
                 enableSystem
                 disableTransitionOnChange
             >
+                <ModalProvider/>
                 {children}
             </ThemeProvider>
         </div>

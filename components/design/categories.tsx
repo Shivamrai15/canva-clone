@@ -21,7 +21,7 @@ import { Ellipsis } from "lucide-react";
 
 export const Categories = () => {
     return (
-        <div className="py-5 w-full flex items-center justify-center">
+        <div className="py-5 w-full lg:flex lg:items-center lg:justify-center">
             <Carousel>
                 <CarouselContent className="">
                     <CarouselItem className="basis-auto">
