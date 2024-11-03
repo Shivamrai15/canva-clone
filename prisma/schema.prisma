@@ -2,25 +2,26 @@ datasource db {
   provider = "mongodb"
   url      = env("DATABASE_URL")
 }
- 
+
 generator client {
   provider = "prisma-client-js"
 }
- 
+
 model User {
   id            String          @id @default(auto()) @map("_id") @db.ObjectId
   name          String?
-  email         String         @unique
+  email         String          @unique
   emailVerified DateTime?
   image         String?
   accounts      Account[]
   sessions      Session[]
   Authenticator Authenticator[]
- 
+  projects      Project[]
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
- 
+
 model Account {
   id                String  @id @default(auto()) @map("_id") @db.ObjectId
   userId            String  @db.ObjectId
@@ -34,35 +35,34 @@ model Account {
   scope             String?
   id_token          String? @db.String
   session_state     String?
- 
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
- 
+
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
- 
+
   @@unique([provider, providerAccountId])
 }
- 
+
 model Session {
   id           String   @id @default(auto()) @map("_id") @db.ObjectId
   sessionToken String   @unique
   userId       String   @db.ObjectId
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
- 
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
- 
+
 model VerificationToken {
   id         String   @id @default(auto()) @map("_id") @db.ObjectId
   identifier String
   token      String
   expires    DateTime
- 
+
   @@unique([identifier, token])
 }
- 
 
 model Authenticator {
   credentialID         String  @id @map("_id")
@@ -73,19 +73,61 @@ model Authenticator {
   credentialDeviceType String
   credentialBackedUp   Boolean
   transports           String?
- 
+
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
- 
+
   @@unique([userId, credentialID])
 }
 
-
 model VerificationCode {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
-  email String @unique
-  code String
+  id      String   @id @default(auto()) @map("_id") @db.ObjectId
+  email   String   @unique
+  code    String
   expires DateTime
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+enum Category {
+  CERTIFICATE
+  DOC
+  WHITEBOARD
+  BRAINSTORM
+  SOCIALMEDIA
+  CUSTOM
+}
+
+model Project {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  name       String   @default("Untitled design")
+  type       Category
+  height     Int
+  width      Int
+  userId     String   @db.ObjectId
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  isPrivate  Boolean  @default(true)
+  isTemplate Boolean  @default(false)
+  isPremium  Boolean  @default(false)
+  thumbnail  String?  @db.String
+  pages      Page[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+}
+
+model Page {
+  id        String  @id @default(auto()) @map("_id") @db.ObjectId
+  name      String?
+  position  Int
+  data      Json    @default("{}")
+  projectId String  @db.ObjectId
+  project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([projectId])
 }
