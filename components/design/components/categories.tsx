@@ -4,8 +4,6 @@ import {
     Carousel,
     CarouselContent,
     CarouselItem,
-    CarouselNext,
-    CarouselPrevious,
 } from "@/components/ui/carousel";
 
 import {
@@ -18,8 +16,13 @@ import {
     WhiteBoardIcon
 } from "@/components/icons/icons";
 import { Ellipsis } from "lucide-react";
+import { useCreateModal } from "@/components/create-modal/hooks/use-create-modal";
+import { Category } from "@/types";
 
 export const Categories = () => {
+
+    const { onOpen } = useCreateModal();
+
     return (
         <div className="py-5 w-full lg:flex lg:items-center lg:justify-center">
             <Carousel>
@@ -60,7 +63,10 @@ export const Categories = () => {
                             <p className="text-xs truncate text-nowrap text-zinc-500 dark:text-zinc-400 font-medium opacity-0 group-hover:opacity-100">Create new</p>
                         </div>
                     </CarouselItem>
-                    <CarouselItem className="basis-auto">
+                    <CarouselItem 
+                        className="basis-auto"
+                        onClick={()=>onOpen(Category.SOCIALMEDIA)}
+                    >
                         <div className="w-20 flex flex-col gap-y-0.5 items-center justify-center group cursor-default md:cursor-pointer">
                             <div className="h-12 mb-1.5 aspect-square rounded-full bg-[#ff3b4b] flex items-center justify-center">
                                 <SocialMediaIcon className="h-8 w-8 text-white group-hover:scale-110 transition-all duration-300"/>
@@ -69,7 +75,10 @@ export const Categories = () => {
                             <p className="text-xs truncate text-nowrap text-zinc-500 dark:text-zinc-400 font-medium opacity-0 group-hover:opacity-100">See all</p>
                         </div>
                     </CarouselItem>
-                    <CarouselItem className="basis-auto">
+                    <CarouselItem 
+                        className="basis-auto"
+                        onClick={()=>onOpen(Category.CUSTOM)}
+                    >
                         <div className="w-20 flex flex-col gap-y-0.5 items-center justify-center group cursor-default md:cursor-pointer">
                             <div className="h-12 mb-1.5 aspect-square rounded-full bg-[#f2f3f5] flex items-center justify-center">
                                 <CustomSizeIcon className="h-6 w-6 text-black group-hover:scale-110 transition-all duration-300"/>
@@ -78,7 +87,10 @@ export const Categories = () => {
                             <p className="text-xs truncate text-nowrap text-zinc-500 dark:text-zinc-400 font-medium opacity-0 group-hover:opacity-100">Create new</p>
                         </div>
                     </CarouselItem>
-                    <CarouselItem className="basis-auto">
+                    <CarouselItem 
+                        className="basis-auto"
+                        onClick={()=>onOpen(Category.UPLOAD)}
+                    >
                         <div className="w-20 flex flex-col gap-y-0.5 items-center justify-center group cursor-default md:cursor-pointer">
                             <div className="h-12 mb-1.5 aspect-square rounded-full bg-[#f2f3f5] flex items-center justify-center">
                                 <UploadIcon className="h-6 w-6 text-black group-hover:scale-110 transition-all duration-300"/>
@@ -87,7 +99,10 @@ export const Categories = () => {
                             <p className="text-xs truncate text-nowrap text-zinc-500 dark:text-zinc-400 font-medium opacity-0 group-hover:opacity-100">Add media</p>
                         </div>
                     </CarouselItem>
-                    <CarouselItem className="basis-auto">
+                    <CarouselItem 
+                        className="basis-auto"
+                        onClick={()=>onOpen(Category.MORE)}
+                    >
                         <div className="w-20 flex flex-col gap-y-0.5 items-center justify-center group cursor-default md:cursor-pointer">
                             <div className="h-12 mb-1.5 aspect-square rounded-full bg-[#f2f3f5] flex items-center justify-center">
                                 <Ellipsis className="h-6 w-6 text-[#6453d0] group-hover:scale-110 transition-all duration-300"/>

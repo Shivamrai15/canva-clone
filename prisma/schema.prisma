@@ -94,8 +94,23 @@ enum Category {
   DOC
   WHITEBOARD
   BRAINSTORM
-  SOCIALMEDIA
+  INSTAGRAMPOST
+  LOGO
+  POSTER
+  DISCORDAVATAR
+  RESUME
+  YOUTUBETHUMBNAIL
+  INVITATION
   CUSTOM
+  FACEBOOKPOST
+  INSTAGRAMSTORY
+  WHATSAPPSTATUS
+  FACEBOOKCOVER
+  YOUTUBEBANNER
+  TWITTERPOST
+  POSTCARD
+  FLYER
+  MENU
 }
 
 model Project {
@@ -107,7 +122,9 @@ model Project {
   userId     String   @db.ObjectId
   user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   isPrivate  Boolean  @default(true)
+  isPublicEditable Boolean @default(false)
   isTemplate Boolean  @default(false)
+  templateId String? @db.ObjectId
   isPremium  Boolean  @default(false)
   thumbnail  String?  @db.String
   pages      Page[]
@@ -122,7 +139,7 @@ model Page {
   id        String  @id @default(auto()) @map("_id") @db.ObjectId
   name      String?
   position  Int
-  data      Json    @default("{}")
+  data      Json?
   projectId String  @db.ObjectId
   project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
 

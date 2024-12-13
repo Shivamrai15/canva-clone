@@ -24,7 +24,7 @@ export const OauthButton = ({
             onClick={onClick}
             disabled={disabled}
         >
-            <Icon className="h-8 w-8 absolute left-3 block"/>
+            <Icon className="h-5 w-5 absolute left-3 block"/>
             <div className="font-semibold">{title}</div>
         </Button>
     )

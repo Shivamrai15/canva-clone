@@ -7,7 +7,7 @@ import { useTheme } from "next-themes";
 import { UpgradeButton } from "@/components/utils/upgrade-button";
 import { CreateDesignButton } from "@/components/utils/create-design-button";
 import { TrashButton } from "@/components/utils/trash-button";
-import { RecentDesigns } from "@/components/design/recent-design";
+import { RecentDesigns } from "@/components/design/components/recent-design";
 
 export const InstantOptions = () => {
     

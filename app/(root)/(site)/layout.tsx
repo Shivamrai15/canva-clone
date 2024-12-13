@@ -1,4 +1,4 @@
-import { Wrapper } from "@/components/layout/wrapper";
+import { Wrapper } from "@/components/layout/components/wrapper";
 
 interface SiteLayoutProps {
     children: React.ReactNode;

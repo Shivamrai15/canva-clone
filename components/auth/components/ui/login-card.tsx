@@ -7,7 +7,7 @@ import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 import { HiOutlineMail } from "react-icons/hi";
 import { OauthButton } from "./oauth-button";
-import { LoginForm } from "@/components/auth/forms/login.form";
+import { LoginForm } from "@/components/auth/components/forms/login.form";
 import { toast } from "sonner";
 
 

@@ -6,12 +6,15 @@ import { useState } from "react";
 import { FaListUl } from "react-icons/fa";
 import { Button } from "@/components/ui/button";
 import { LayoutGrid } from "lucide-react";
+import { useCreateModal } from "@/components/create-modal/hooks/use-create-modal";
+import { Category } from "@/types";
 
 
 export const RecentDesignCards = () => {
     
     const items = [];
     const [style, setStyle] = useState(true);
+    const { onOpen } = useCreateModal();
 
     return (
         <section className="w-full p-6">
@@ -44,7 +47,7 @@ export const RecentDesignCards = () => {
                             <h2 className="text-lg font-semibold text-zinc-800 dark:text-zinc-200">Possibilities await</h2>
                             <div className="text-[15px] tracking-tighter">
                                 <span className="text-zinc-800 dark:text-zinc-400 mr-1 select-none">Get started by</span>
-                                <span className="text-violet-500 dark:text-violet-400 underline select-none md:cursor-pointer">creating a design</span>
+                                <span onClick={()=>onOpen(Category.FORYOU)} className="text-violet-500 dark:text-violet-400 underline select-none md:cursor-pointer">creating a design</span>
                             </div>
                         </div>
                     </div>

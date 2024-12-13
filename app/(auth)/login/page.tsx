@@ -1,4 +1,4 @@
-import { LoginCard } from "@/components/auth/ui/login-card";
+import { LoginCard } from "@/components/auth/components/ui/login-card";
 import { Metadata } from "next";
 
 export const metadata : Metadata = {

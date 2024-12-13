@@ -6,7 +6,7 @@ import {
     Dialog,
     DialogContent,
 } from "@/components/ui/dialog";
-import { UpgradeInfo } from "@/components/layout/upgrade-info";
+import { UpgradeInfo } from "@/components/layout/components/upgrade-info";
 import { useModal } from "@/hooks/use-modal";
   
 
